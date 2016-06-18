@@ -60,5 +60,5 @@ output "bastion_user" {
 }
 
 output "bastion_hosts" {
-    value = "${(join(",",aws_instance.bastion.*.server_public_addresses),0)}"
+    value = "${join(",",aws_instance.bastion.*.server_public_addresses)}"
 }
