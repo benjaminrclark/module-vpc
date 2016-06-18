@@ -38,6 +38,16 @@ variable "aws_availability_zone_count" {
   default     = "3"
 }
 
+variable "bastion_ami" {
+  description = "The ami to use for the bastion instance"
+  default = "ami-464af835"
+}
+
+variable "bastion_user" {
+  description = "The user to use to log in to the bastion instance"
+  default = "ubuntu"
+}
+
 variable "ssh_public_key" {
     description = "Contents of an SSH public key to grant access to created instances"
 }

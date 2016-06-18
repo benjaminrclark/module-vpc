@@ -35,10 +35,30 @@ output "public_subnet_availability_zones" {
     value = "${join(",",aws_subnet.public.*.availability_zone)}"
 }
 
+output "private_subnet_ids" {
+    value = "${join(",",aws_subnet.private.*.id)}"
+}
+
+output "private_subnet_cidrs" {
+    value = "${join(",",aws_subnet.private.*.cidr_block)}"
+}
+
+output "private_subnet_availability_zones" {
+    value = "${join(",",aws_subnet.private.*.availability_zone)}"
+}
+
 output "key_name" {
     value = "${aws_key_pair.main.id}"
 }
 
 output "infra_id" {
     value = "${element(split("-", aws_vpc.main.id), 1)}"
+}
+
+output "bastion_user" {
+    value = "${var.bastion_user}"
+}
+
+output "bastion_hosts" {
+    value = "${(join(",",aws_instance.bastion.*.server_public_addresses),0)}"
 }
