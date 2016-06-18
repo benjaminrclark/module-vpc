@@ -93,7 +93,7 @@ resource "aws_route_table_association" "private" {
 
 # Allow SSH ingress and egress, plus http and https egress for updates
 resource "aws_security_group" "bastion" {
-  vpc_id = "${aws_vpc.default.id}"
+  vpc_id = "${aws_vpc.main.id}"
   tags {
     Name = "bastion"
   }
@@ -140,7 +140,6 @@ resource "aws_security_group_rule" "bastion_https_egress" {
 resource "aws_instance" "bastion" {
   count                       = "${var.aws_availability_zone_count}"
   availability_zone           = "${element(split(",",lookup(var.aws_availability_zones, var.aws_region)),count.index)}"
-  vpc_id                      = "${aws_vpc.main.id}"
   ami                         = "${var.bastion_ami}"
   instance_type               = "${var.bastion_instance_type}"
   key_name                    = "${aws_key_pair.main.key_name}"

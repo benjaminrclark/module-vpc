@@ -48,6 +48,11 @@ variable "bastion_user" {
   default = "ubuntu"
 }
 
+variable "bastion_instance_type" {
+  description = "The instance type for bastion hosts"
+  default = "t2.micro"
+}
+
 variable "ssh_public_key" {
     description = "Contents of an SSH public key to grant access to created instances"
 }
