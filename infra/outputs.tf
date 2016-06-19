@@ -59,6 +59,10 @@ output "bastion_user" {
     value = "${var.bastion_user}"
 }
 
+output "bastion_security_group" {
+    value = "${aws_security_group.bastion.id}"
+}
+
 output "bastion_hosts" {
     value = "${join(",",aws_instance.bastion.*.public_ip)}"
 }
