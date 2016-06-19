@@ -54,7 +54,7 @@ resource "aws_route_table_association" "public" {
 # 10.0.*.4
 resource "aws_eip" "nat" {
   count = "${var.aws_availability_zone_count}"
-  associate_with_private_ip = "${cidrhost(element(aws_subnet.public.*.id, count.index),4)}"
+  associate_with_private_ip = "${cidrhost(element(aws_subnet.public.*.cidr_block, count.index),4)}"
   vpc = true
 }
 
@@ -146,7 +146,7 @@ resource "aws_instance" "bastion" {
   monitoring                  = true
   vpc_security_group_ids      = ["${aws_security_group.bastion.id}"]
   subnet_id                   = "${element(aws_subnet.public.*.id, count.index)}"
-  private_ip                  = "${cidrhost(element(aws_subnet.public.*.id, count.index),5)}"
+  private_ip                  = "${cidrhost(element(aws_subnet.public.*.cidr_block, count.index),5)}"
   associate_public_ip_address = true
   tags {
     Name = "bastion"
